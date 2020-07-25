@@ -1,3 +1,0 @@
-
-  worker: node server.js
-
