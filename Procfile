@@ -1,3 +1,3 @@
-{
+
   worker: node server.js
-}
+
