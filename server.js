@@ -88,9 +88,9 @@ client.on("guildMemberAdd", async (member) => {
   const canvas = Canvas.createCanvas(700, 250);
 	const ctx = canvas.getContext('2d');
   
-  var imgx = db.get(`wimg_${member.guild.id}`);
+  var wimg = db.get(`wimg_${member.guild.id}`);
 
-	const background = await Canvas.loadImage(`${imgx}`);
+	const background = await Canvas.loadImage(`${wimg}`);
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	ctx.strokeStyle = '#74037b';
@@ -112,14 +112,14 @@ client.on("guildMemberAdd", async (member) => {
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
 	ctx.drawImage(avatar, 25, 25, 200, 200);
   
-  var greet = db.get(`wgreet_${member.guild.id}`);
+  var wmsg = db.get(`wmsg_${member.guild.id}`);
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
   
-  if (greet.indexOf("<USER>") != -1) greet = greet.replace("<USER>", `${member}`);
-  if (greet.indexOf("<GUILD>") != -1) greet = greet.replace("<GUILD>", `${member.guild.name}`);
+  if (wmsg.indexOf("<USER>") != -1) wmsg = wmsg.replace("<USER>", `${member}`);
+  if (wmsg.indexOf("<GUILD>") != -1) wmsg = wmsg.replace("<GUILD>", `${member.guild.name}`);
   
-  client.channels.cache.get(chx).send(`${greet}`, attachment);
+  client.channels.cache.get(chx).send(`${wmsg}`, attachment);
 
 });
 
