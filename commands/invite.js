@@ -9,7 +9,7 @@ module.exports = {
     
     .setColor('#7289da')
     .setTitle('🔗 Invite Me!')
-    .setURL('https://discordapp.com/api/oauth2/authorize?client_id=732828598435708974&permissions=8&scope=bot')
+    .setURL('https://discord.com/api/oauth2/authorize?client_id=462328608896188421&permissions=8&scope=bot')
     
     message.channel.send(embed);
     
