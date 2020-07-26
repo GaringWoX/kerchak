@@ -19,7 +19,7 @@ module.exports = {
     };
   
     if(!args.length) {
-      message.channel.send('Please send me the __Welcome Image Link/URL!__')
+       return message.channel.send('Please send me the __Welcome Image Link/URL!__')
     };
     
     db.set(`wimg_${message.guild.id}`, args);
