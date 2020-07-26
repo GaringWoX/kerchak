@@ -24,7 +24,7 @@ module.exports = {
     
     db.set(`wimg_${message.guild.id}`, args);
  
-    message.channel.send(`__Welcome Image__ have been set to ${args}`);
+    message.channel.send(`__Welcome Image__ have been set to :\n${args}`);
     
    },
 };
