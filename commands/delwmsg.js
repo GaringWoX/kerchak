@@ -13,7 +13,7 @@ module.exports = {
     };
     
     if(!db.has(`wmsg_${message.guild.id}`)) {
-       return message.channel.send('Theres no __Welcome Message__ to delete.')
+      return message.channel.send('Theres no __Welcome Message__ to delete.')
     };
    
     db.delete(`wmsg_${message.guild.id}`);
