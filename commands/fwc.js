@@ -13,16 +13,15 @@ module.exports = {
      return message.channel.send('Please set your __Welcome Channel!__')
     };
     
-    if(!db.has(`wgreet_${message.guild.id}`)) {
+    if(!db.has(`wmsg_${message.guild.id}`)) {
       return message.channel.send('Please set your __Welcome Message!__')
     };
     
     if(!db.has(`wimg_${message.guild.id}`)) {
       return message.channel.send('Please set your __Welcome Image!__')
     };
-    
-		message.client.emit('guildMemberAdd', message.member);
+
+    message.client.emit('guildMemberAdd', message.member);
       
-  
   },
 };
