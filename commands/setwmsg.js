@@ -17,7 +17,7 @@ module.exports = {
     var gx = db.fetch(`wgreet_${message.guild.id}`);
     
     if(!args.length && db.has(`wgreet_${message.guild.id}`)) {
-     return message.channel.send(`Current __Welcome Message__ is :\n${gx}`)
+      return message.channel.send(`Current __Welcome Message__ is :\n${gx}`)
     };
     
     if(!args.length) {
