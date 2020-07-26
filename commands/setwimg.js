@@ -15,11 +15,11 @@ module.exports = {
     var wimg = db.fetch(`wimg_${message.guild.id}`);
     
     if(!args.length && db.has(`wimg_${message.guild.id}`)) {
-       return message.channel.send(`Current __Welcome Image__ is :\n${wimg}`)
+      return message.channel.send(`Current __Welcome Image__ is :\n${wimg}`)
     };
   
     if(!args.length) {
-       return message.channel.send('Please send me the __Welcome Image Link/URL!__')
+      return message.channel.send('Please send me the __Welcome Image Link/URL!__')
     };
     
     db.set(`wimg_${message.guild.id}`, args);
