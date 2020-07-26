@@ -26,7 +26,7 @@ module.exports = {
 
     db.set(`wmsg_${message.guild.id}`, args.join(" "));
     
-    message.channel.send(`__Welcome Message_ set to :\n${wmsg}`);
+    message.channel.send(`__Welcome Message__ have been set to :\n${wmsg}`);
 
   },
 };
