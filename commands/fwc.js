@@ -1,9 +1,9 @@
 const db = require('quick.db');
 
 module.exports = {
-	name: 'fwc',
-	description: 'fake new member',
-	run: (client, message, args) => {
+  name: 'fwc',
+  description: 'fake new member',
+  run: (client, message, args) => {
     
     if(!message.member.hasPermission('ADMINISTRATOR')) {
       return message.reply('You lack of __PERMISSION__ `ADMINISTRATOR`')
