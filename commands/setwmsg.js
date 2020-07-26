@@ -12,11 +12,11 @@ module.exports = {
       return message.reply('You lack of __PERMISSION__ `MANAGE_CHANNELS`')
     };
     
-    var greet = args.join(" ");
+    var wmsg = args.join(" ");
     
-    var gx = db.fetch(`wgreet_${message.guild.id}`);
+    var gx = db.fetch(`wmsg_${message.guild.id}`);
     
-    if(!args.length && db.has(`wgreet_${message.guild.id}`)) {
+    if(!args.length && db.has(`wmsg_${message.guild.id}`)) {
       return message.channel.send(`Current __Welcome Message__ is :\n${gx}`)
     };
     
@@ -24,9 +24,9 @@ module.exports = {
       return message.channel.send("Please send me the __Welcome Message!__")
     };
 
-    db.set(`wgreet_${message.guild.id}`, args.join(" "));
+    db.set(`wmsg_${message.guild.id}`, args.join(" "));
     
-    message.channel.send(`Greeting set to :\n${greet}`);
+    message.channel.send(`__Welcome Message_ set to :\n${wmsg}`);
 
   },
 };
