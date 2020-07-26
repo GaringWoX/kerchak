@@ -17,7 +17,7 @@ module.exports = {
     var wchan = db.fetch(`wchan_${message.guild.id}`);
     
     if(!channel && db.has(`wchan_${message.guild.id}`)) {
-       return message.channel.send(`Current __Welcome Channel__ is :\n<#${wchan}>`)
+      return message.channel.send(`Current __Welcome Channel__ is :\n<#${wchan}>`)
     };
     
     if(!channel) {
