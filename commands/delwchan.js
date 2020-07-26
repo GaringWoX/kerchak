@@ -18,7 +18,7 @@ module.exports = {
    
     db.delete(`wchan_${message.guild.id}`);
     
-    message.channel.send('__WELCOME CHANNEL__ deleted!');
+    message.channel.send('__Welcome Channel__ deleted!');
 
   },
 };
