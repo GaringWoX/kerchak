@@ -12,11 +12,11 @@ module.exports = {
       return message.reply('You lack of __PERMISSION__ `MANAGE_CHANNELS`')
     };
     
-    if(!db.has(`wgreet_${message.guild.id}`)) {
+    if(!db.has(`wmsg_${message.guild.id}`)) {
        return message.channel.send('Theres no __Welcome Message__ to delete.')
     };
    
-    db.delete(`wgreet_${message.guild.id}`);
+    db.delete(`wmsg_${message.guild.id}`);
     
     message.channel.send('__Welcome Message__ deleted!');
     
