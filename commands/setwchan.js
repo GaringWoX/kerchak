@@ -26,7 +26,7 @@ module.exports = {
     
     db.set(`wchan_${message.guild.id}`, channel.id);
  
-    message.channel.send(`__Welcome Channel__ have been set to ${channel}`);
+    message.channel.send(`__Welcome Channel__ have been set to :\n${channel}`);
 
   },
 };
