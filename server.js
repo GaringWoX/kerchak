@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const Canvas = require('canvas');
+const { registerFont, Canvas } = require('canvas');
 const { prefix, botLogs } = require('./config.json');
 const fs = require('fs');
 const db = require('quick.db');
@@ -25,6 +25,7 @@ client.once('ready', () => {
 	console.log('Ready!');
   client.user.setActivity('BOKEP', { type: `STREAMING` });
 });
+
 
 client.on("guildCreate", guild => {
   const gcembed = new Discord.MessageEmbed()
@@ -67,25 +68,32 @@ const command = args.shift().toLowerCase();
 
 // START OF CANVAS
 
+client.on("guildMemberUpdate", (oldMember, newMember) => {
+  const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has('464110415727558697'));
+	console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+});
+
 client.on("guildMemberAdd", async (member) => {
   let chx = db.get(`wchan_${member.guild.id}`);
   
   if(chx === null) {
     return;
   }
-
+  
+  registerFont('comicsans.ttf', { family: 'Comic Sans' })
+  
   const applyText = (canvas, text) => {
 	const ctx = canvas.getContext('2d');
-	let fontSize = 70;
+	let fontSize = 50;
 
 	do {
-		ctx.font = `${fontSize -= 10}px sans-serif`;
+		ctx.font = `${fontSize -= 10}px Comic Sans`;
 	} while (ctx.measureText(text).width > canvas.width - 300);
 
 	return ctx.font;
   };
   
-  const canvas = Canvas.createCanvas(700, 250);
+  const canvas = Canvas.createCanvas(700, 350);
 	const ctx = canvas.getContext('2d');
   
   var wimg = db.get(`wimg_${member.guild.id}`);
@@ -96,7 +104,7 @@ client.on("guildMemberAdd", async (member) => {
 	ctx.strokeStyle = '#74037b';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-	ctx.font = '28px sans-serif';
+	ctx.font = '28px "Comic Sans"';
 	ctx.fillStyle = '#ffffff';
 	ctx.fillText(`Welcome to ${member.guild.name}`, canvas.width / 2.5, canvas.height / 3.5);
 
@@ -105,12 +113,12 @@ client.on("guildMemberAdd", async (member) => {
 	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
 
 	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
+	ctx.arc(125, 175, 100, 0, Math.PI * 2, true);
 	ctx.closePath();
 	ctx.clip();
 
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 25, 200, 200);
+	ctx.drawImage(avatar, 25, 75, 200, 200);
   
   var wmsg = db.get(`wmsg_${member.guild.id}`);
 
@@ -124,5 +132,5 @@ client.on("guildMemberAdd", async (member) => {
 });
 
 // END OF CANVAS
-  
+
 client.login(process.env.TOKEN);
