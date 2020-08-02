@@ -79,9 +79,11 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
 	if (addedRoles.has(nbid)) {
     const bcx = ('722420259721838653');
     
+    newMember.roles.remove(xbid);
+    
     const bembed = new Discord.MessageEmbed()
     .setColor('#f47fff')
-    .setTitle(`<a:boostingtop:729649903483093012> ${oldMember.displayName} just boosted the server!`)
+    .setTitle(`<a:boostgems:739595657123201125> ${oldMember.displayName} just boosted the server!`)
     .setThumbnail(newMember.user.displayAvatarURL())
     .setDescription(`Thank you ${newMember.user} for boosting the server.\nBecause of you, we are now have __**${newMember.guild.premiumSubscriptionCount}**__ boost in total.\nPlease DM our Admin or Moderator for a __**Custom Role!**__`)
     .setTimestamp()
