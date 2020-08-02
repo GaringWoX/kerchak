@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { registerFont, Canvas } = require('canvas');
+const Canvas = require('canvas');
 const { prefix, botLogs } = require('./config.json');
 const fs = require('fs');
 const db = require('quick.db');
@@ -25,7 +25,6 @@ client.once('ready', () => {
 	console.log('Ready!');
   client.user.setActivity('BOKEP', { type: `STREAMING` });
 });
-
 
 client.on("guildCreate", guild => {
   const gcembed = new Discord.MessageEmbed()
@@ -66,12 +65,33 @@ const command = args.shift().toLowerCase();
   
 });
 
-// START OF CANVAS
+// Boost Event
 
 client.on("guildMemberUpdate", (oldMember, newMember) => {
-  const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has('464110415727558697'));
-	console.log(`The roles ${addedRoles.map(r => r.name)} were added to ${oldMember.displayName}.`);
+  
+  const nbid = ('722412731650670693');
+  const xbid = ('733419579585331320');
+  
+  const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+	if (removedRoles.has(nbid)) oldMember.roles.add(xbid);
+  
+  const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+	if (addedRoles.has(nbid)) {
+    const bcx = ('738826287124185088')
+    
+    const bembed = new Discord.MessageEmbed()
+    .setColor('#f47fff')
+    .setTitle(`<a:boostingtop:729649903483093012> ${oldMember.displayName} just boosted the server!`)
+    .setThumbnail(newMember.user.displayAvatarURL())
+    .setDescription(`Thank you ${newMember.user} for boosting the server.\nBecause of you, we are now have __**${newMember.guild.premiumSubscriptionCount}**__ boost in total.\nPlease DM our Admin or Moderator for a __**Custom Role!**__`)
+    .setTimestamp()
+  
+    client.channels.cache.get(bcx).send(bembed);
+  }
+  
 });
+
+// Start of Canvas
 
 client.on("guildMemberAdd", async (member) => {
   let chx = db.get(`wchan_${member.guild.id}`);
@@ -79,15 +99,13 @@ client.on("guildMemberAdd", async (member) => {
   if(chx === null) {
     return;
   }
-  
-  registerFont('comicsans.ttf', { family: 'Comic Sans' })
-  
+
   const applyText = (canvas, text) => {
 	const ctx = canvas.getContext('2d');
-	let fontSize = 50;
+	let fontSize = 60;
 
 	do {
-		ctx.font = `${fontSize -= 10}px Comic Sans`;
+		ctx.font = `bold ${fontSize -= 10}px Calibri`;
 	} while (ctx.measureText(text).width > canvas.width - 300);
 
 	return ctx.font;
@@ -97,28 +115,42 @@ client.on("guildMemberAdd", async (member) => {
 	const ctx = canvas.getContext('2d');
   
   var wimg = db.get(`wimg_${member.guild.id}`);
+  var wimg2 = db.get(`wimg2_${member.guild.id}`);
+  var images = [`${wimg}`, `${wimg2}`];
+  var imx = Math.floor(Math.random() * images.length)
 
-	const background = await Canvas.loadImage(`${wimg}`);
+	const background = await Canvas.loadImage(images[imx]);
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 	ctx.strokeStyle = '#74037b';
 	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.font = 'bold 15px Impact';
+  ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = 'black';
+  ctx.shadowBlur = 7;
+  ctx.fillText(`Kamu member\nke #${member.guild.memberCount}`, canvas.width / 1.25, canvas.height / 1.4);
 
-	ctx.font = '28px "Comic Sans"';
+	ctx.font = 'bold 40px Calibri';
 	ctx.fillStyle = '#ffffff';
-	ctx.fillText(`Welcome to ${member.guild.name}`, canvas.width / 2.5, canvas.height / 3.5);
-
-	ctx.font = applyText(canvas, `${member.displayName}!`);
+  ctx.shadowColor = 'black';
+  ctx.shadowBlur = 7;
+	ctx.fillText(`Selamat Datang di`, canvas.width / 5.1, canvas.height / 6.5);
+  
+	ctx.font = applyText(canvas, `${member.displayName}`);
 	ctx.fillStyle = '#ffffff';
-	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+  ctx.textAlign = 'center';
+  ctx.shadowColor = 'black';
+  ctx.shadowBlur = 7;
+	ctx.fillText(`${member.displayName}`, canvas.width / 2.0, canvas.height / 1.05);
 
 	ctx.beginPath();
-	ctx.arc(125, 175, 100, 0, Math.PI * 2, true);
+	ctx.arc(345, 145, 80, 0, Math.PI * 2, true);
 	ctx.closePath();
-	ctx.clip();
+  ctx.clip();
 
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 75, 200, 200);
+	ctx.drawImage(avatar, 265, 65, 160, 160);
   
   var wmsg = db.get(`wmsg_${member.guild.id}`);
 
