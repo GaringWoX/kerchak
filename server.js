@@ -77,7 +77,7 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
   
   const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
 	if (addedRoles.has(nbid)) {
-    const bcx = ('738826287124185088')
+    const bcx = ('722420259721838653');
     
     const bembed = new Discord.MessageEmbed()
     .setColor('#f47fff')
