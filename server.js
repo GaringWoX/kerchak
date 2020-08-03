@@ -22,8 +22,18 @@ for (const file of commandFiles) {
 // ACTIVITY
 
 client.once('ready', () => {
+  const actvs = [
+    `with ${client.users.cache.size} users`,
+    `at discord.gg/gangsebelah`,
+    `at GANG SEBELAH`,
+    `and Making Love`
+    ];
+  
 	console.log('Ready!');
-  client.user.setActivity('BOKEP', { type: `STREAMING` });
+  setInterval(() => {
+        const index = Math.floor(Math.random() * (actvs.length));
+        client.user.setActivity(`${actvs[index]}`);
+    }, 7000);
 });
 
 client.on("guildCreate", guild => {
@@ -83,9 +93,10 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
     
     const bembed = new Discord.MessageEmbed()
     .setColor('#f47fff')
-    .setTitle(`<a:boostgems:739595657123201125> ${oldMember.displayName} just boosted the server!`)
+    .setAuthor(`${oldMember.displayName} just boosted the server!`, 'https://cdn.discordapp.com/emojis/739595657123201125.gif')
     .setThumbnail(newMember.user.displayAvatarURL())
     .setDescription(`Thank you ${newMember.user} for boosting the server.\nBecause of you, we are now have __**${newMember.guild.premiumSubscriptionCount}**__ boost in total.\nPlease DM our Admin or Moderator for a __**Custom Role!**__`)
+    .setFooter(`Current Server Level : ${newMember.guild.premiumTier}`, 'https://cdn.discordapp.com/emojis/739595657123201125.gif')
     .setTimestamp()
   
     client.channels.cache.get(bcx).send(bembed);
@@ -145,10 +156,13 @@ client.on("guildMemberAdd", async (member) => {
   ctx.shadowColor = 'black';
   ctx.shadowBlur = 7;
 	ctx.fillText(`${member.displayName}`, canvas.width / 2.0, canvas.height / 1.05);
-
+  
 	ctx.beginPath();
 	ctx.arc(345, 145, 80, 0, Math.PI * 2, true);
-	ctx.closePath();
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = 5;
+	ctx.stroke();
+  ctx.closePath();
   ctx.clip();
 
 	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
@@ -162,9 +176,90 @@ client.on("guildMemberAdd", async (member) => {
   if (wmsg.indexOf("<GUILD>") != -1) wmsg = wmsg.replace("<GUILD>", `${member.guild.name}`);
   
   client.channels.cache.get(chx).send(`${wmsg}`, attachment);
+  
+  // Welcome Embed
+  
+  const chxx = ('738826287124185088');//db.get(`wembc_${member.guild.id}`);
+  const wembed = new Discord.MessageEmbed()
+  
+  .setAuthor(`Selamat Datang di ${member.guild.name}, ${member.displayName}!`, `${member.user.displayAvatarURL()}`)
+  .setThumbnail(member.user.avatarURL())
+  .setDescription(
+    `**Baca tata krama di :** <#719482949011243048>
+**Ambil role di :** <#719483981355024404>
+**Dan jangan lupa isi data diri lu di :** <#719484046174060555>\n
+**Enjoy your stay and Have fun guys! Cheers...**🍻`)
+  .setImage('https://cdn.discordapp.com/attachments/649483422426726430/719534483400818688/banner.jpg')
+  .setColor('#7289da')
+  .setFooter(`Member Saat ini : ${member.guild.memberCount}`)
+  .setTimestamp()
+  
+  client.channels.cache.get(chxx).send(`Welcome ${member}`, wembed);
 
 });
 
 // END OF CANVAS
+
+client.on("guildMemberRemove", async (member) => {
+  let lchx = db.get(`wchan_${member.guild.id}`);
+  
+  if(lchx === null) {
+    return;
+  }
+
+  const applyText = (canvas, text) => {
+	const ctx = canvas.getContext('2d');
+	let fontSize = 60;
+
+	do {
+		ctx.font = `bold ${fontSize -= 10}px Calibri`;
+	} while (ctx.measureText(text).width > canvas.width - 300);
+
+	return ctx.font;
+  };
+  
+  const canvas = Canvas.createCanvas(700, 350);
+	const ctx = canvas.getContext('2d');
+  
+  var limg = db.get(`limg_${member.guild.id}`);
+
+	const background = await Canvas.loadImage(`${limg}`);
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+	ctx.strokeStyle = '#74037b';
+	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  
+	ctx.font = 'bold 40px Calibri';
+	ctx.fillStyle = '#ffffff';
+  ctx.shadowColor = 'black';
+  ctx.shadowBlur = 7;
+	ctx.fillText(`Selamat Jalan Sahabat`, canvas.width / 7.0, canvas.height / 6.5);
+  
+	ctx.font = applyText(canvas, `${member.displayName}`);
+	ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = 'black';
+  ctx.shadowBlur = 7;
+	ctx.fillText(`${member.displayName}`, canvas.width / 2.0, canvas.height / 1.1);
+
+	ctx.beginPath();
+	ctx.arc(345, 175, 80, 0, Math.PI * 2, true);
+	ctx.strokeStyle = 'black';
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  ctx.closePath();
+  ctx.clip();
+
+	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+	ctx.drawImage(avatar, 265, 95, 160, 160);
+  
+  var lmsg = db.get(`lmsg_${member.guild.id}`);
+
+	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'leave-image.png');
+
+  client.channels.cache.get(lchx).send(`${lmsg}`, attachment);
+
+});
+
 
 client.login(process.env.TOKEN);
