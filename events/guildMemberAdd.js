@@ -4,7 +4,7 @@ const db = require('quick.db');
 
 module.exports = async (client, member) => {
   
-  let chx = db.get(`wchan_${member.guild.id}`);
+  let chx = ('719480545951744040');
   
   if(chx === null) {
     return;
@@ -22,18 +22,18 @@ module.exports = async (client, member) => {
   };
   
   const canvas = Canvas.createCanvas(700, 350);
-	const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d');
   
-  var wimg = db.get(`wimg_${member.guild.id}`);
-  var wimg2 = db.get(`wimg2_${member.guild.id}`);
+  var wimg = ('https://cdn.discordapp.com/attachments/738826287124185088/739103257850281984/qw.png');
+  var wimg2 = ('https://cdn.discordapp.com/attachments/738826287124185088/739161662468128878/Untitled-1.png');
   var images = [`${wimg}`, `${wimg2}`];
   var imx = Math.floor(Math.random() * images.length)
 
-	const background = await Canvas.loadImage(images[imx]);
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  const background = await Canvas.loadImage(images[imx]);
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = '#74037b';
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
   
   ctx.font = 'bold 15px Impact';
   ctx.fillStyle = '#ffffff';
@@ -41,42 +41,39 @@ module.exports = async (client, member) => {
   ctx.shadowBlur = 7;
   ctx.fillText(`Kamu member\nke #${member.guild.memberCount}`, canvas.width / 1.25, canvas.height / 1.4);
 
-	ctx.font = 'bold 40px Calibri';
-	ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 40px Calibri';
+  ctx.fillStyle = '#ffffff';
   ctx.shadowColor = 'black';
   ctx.shadowBlur = 7;
-	ctx.fillText(`Selamat Datang di`, canvas.width / 5.1, canvas.height / 6.5);
+  ctx.fillText(`Selamat Datang di`, canvas.width / 5.1, canvas.height / 6.5);
   
-	ctx.font = applyText(canvas, `${member.displayName}`);
-	ctx.fillStyle = '#ffffff';
+  ctx.font = applyText(canvas, `${member.displayName}`);
+  ctx.fillStyle = '#ffffff';
   ctx.textAlign = 'center';
   ctx.shadowColor = 'black';
   ctx.shadowBlur = 7;
-	ctx.fillText(`${member.displayName}`, canvas.width / 2.0, canvas.height / 1.05);
+  ctx.fillText(`${member.displayName}`, canvas.width / 2.0, canvas.height / 1.05);
   
-	ctx.beginPath();
-	ctx.arc(345, 145, 80, 0, Math.PI * 2, true);
+  ctx.beginPath();
+  ctx.arc(345, 145, 80, 0, Math.PI * 2, true);
   ctx.strokeStyle = 'black';
   ctx.lineWidth = 5;
-	ctx.stroke();
+  ctx.stroke();
   ctx.closePath();
   ctx.clip();
 
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 265, 65, 160, 160);
+  const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+  ctx.drawImage(avatar, 265, 65, 160, 160);
   
-  var wmsg = db.get(`wmsg_${member.guild.id}`);
+  var wmsg = (`Welcome to ${member.guild.name}, ${member}!`);
 
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-  
-  if (wmsg.indexOf("<USER>") != -1) wmsg = wmsg.replace("<USER>", `${member}`);
-  if (wmsg.indexOf("<GUILD>") != -1) wmsg = wmsg.replace("<GUILD>", `${member.guild.name}`);
+  const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
   
   client.channels.cache.get(chx).send(`${wmsg}`, attachment);
   
   // Welcome Embed
   
-  const chxx = ('738826287124185088');//db.get(`wembc_${member.guild.id}`);
+  const chxx = ('738826287124185088');
   const wembed = new Discord.MessageEmbed()
   
   .setAuthor(`Selamat Datang di ${member.guild.name}, ${member.displayName}!`, `${member.user.displayAvatarURL()}`)
