@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
-const db = require('quick.db');
 
 module.exports = async (client, member) => {
   
