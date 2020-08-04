@@ -1,17 +1,15 @@
 const Discord = require('discord.js');
 
-module.exports = {
-  name: 'invite',
-  description: 'bot invite link',
-  run: (client, message, args) => {
+exports.run = (client, message, args) => {
+  
+  const cid = client.user.id;
     
-    const embed = new Discord.MessageEmbed()
+  const embed = new Discord.MessageEmbed()
     
-    .setColor('#7289da')
-    .setTitle('🔗 Invite Me!')
-    .setURL('https://discord.com/api/oauth2/authorize?client_id=462328608896188421&permissions=8&scope=bot')
+  .setColor('#7289da')
+  .setTitle('🔗 Invite Me!')
+  .setURL(`https://discord.com/api/oauth2/authorize?client_id=${cid}&permissions=8&scope=bot`)
     
-    message.channel.send(embed);
+  message.channel.send(embed);
     
-  }
 };

@@ -1,9 +1,6 @@
 const db = require('quick.db');
 
-module.exports = {
-  name: 'fwc',
-  description: 'fake new member',
-  run: (client, message, args) => {
+exports.run = (client, message, args) => {
     
     if(!message.member.hasPermission('ADMINISTRATOR')) {
       return message.reply('You lack of __PERMISSION__ `ADMINISTRATOR`')
@@ -21,7 +18,6 @@ module.exports = {
       return message.channel.send('Please set your __Welcome Image!__')
     };
 
-    message.client.emit('guildMemberAdd', message.member);
+    client.emit('guildMemberAdd', message.member);
       
-  },
 };
