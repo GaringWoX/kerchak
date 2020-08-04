@@ -3,7 +3,7 @@ const Canvas = require('canvas');
 
 module.exports = async (client, member) => {
   
-  let lchx = ('719480545951744040);
+  let lchx = ('719480545951744040');
   
   if(lchx === null) {
     return;
