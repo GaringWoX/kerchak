@@ -1,15 +1,15 @@
 const Discord = require('discord.js');
 module.exports = (client, oldMember, newMember) => {
   
-  const nbid = ('722412731650670693', '339525527738122242');
-  const xbid = ('733419579585331320', '464110415727558697');
+  const nbid = ('722412731650670693');
+  const xbid = ('733419579585331320');
   
   const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
 	if (removedRoles.has(nbid)) oldMember.roles.add(xbid);
   
   const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
 	if (addedRoles.has(nbid)) {
-    const bcx = ('722420259721838653', '736341595389165609');
+    const bcx = ('722420259721838653');
     
     newMember.roles.remove(xbid);
     
