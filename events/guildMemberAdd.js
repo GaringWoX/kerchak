@@ -72,7 +72,7 @@ module.exports = async (client, member) => {
   
   // Welcome Embed
   
-  const chxx = ('738826287124185088');
+  const chxx = ('718691608425398345');
   const wembed = new Discord.MessageEmbed()
   
   .setAuthor(`Selamat Datang di ${member.guild.name}, ${member.displayName}!`, `${member.user.displayAvatarURL()}`)
