@@ -14,7 +14,7 @@ module.exports = async (client, member) => {
 	let fontSize = 60;
 
 	do {
-		ctx.font = `bold ${fontSize -= 10}px Calibri`;
+	ctx.font = `bold ${fontSize -= 10}px Calibri`;
 	} while (ctx.measureText(text).width > canvas.width - 300);
 
 	return ctx.font;
