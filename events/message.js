@@ -15,10 +15,6 @@ module.exports = async (client, message) => {
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');
-	};
-  
-  setInterval(() => {
-    client.channels.get(client.config.botLogs).send('ping');
-  }, 280000);
+	}
   
 };
