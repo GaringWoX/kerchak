@@ -23,8 +23,8 @@ module.exports = async (client, member) => {
   const canvas = Canvas.createCanvas(700, 350);
   const ctx = canvas.getContext('2d');
   
-  var wimg = ('https://cdn.discordapp.com/attachments/738826287124185088/739103257850281984/qw.png');
-  var wimg2 = ('https://cdn.discordapp.com/attachments/738826287124185088/739161662468128878/Untitled-1.png');
+  var wimg = ('https://cdn.discordapp.com/attachments/738826287124185088/740604956557443092/welcome_4.png');
+  var wimg2 = ('https://cdn.discordapp.com/attachments/738826287124185088/740605518560624720/welcome_43.png');
   var images = [`${wimg}`, `${wimg2}`];
   var imx = Math.floor(Math.random() * images.length)
 
