@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
 const config = require('./config.json');
-const ar = require('./ar.json');
 const fs = require('fs');
 const db = require('quick.db');
 
 const client = new Discord.Client({
   disableEveryone: true
 });
+
+var ar = require('./ar.json');
 
 client.config = config;
 client.ar = ar;
