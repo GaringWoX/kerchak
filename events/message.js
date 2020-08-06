@@ -3,9 +3,12 @@ module.exports = async (client, message) => {
   if (message.author.bot) return;
   if (!message.guild) return;
   
-  if(client.ar[message.content]) {
-   if(client.ar[message.content].indexOf("<USER>") != -1)
+  
+  if(client.ar[message.content].indexOf("<USER>") != -1) {
     message.channel.send(client.ar[message.content].replace("<USER>", `${message.author}`));
+  } else
+  if(!client.ar[message.content].indexOf("<USER>") != -1) {
+    message.channel.send(client.ar[message.content]);
   }
   
   if (message.content.indexOf(client.config.prefix) !== 0) return;
