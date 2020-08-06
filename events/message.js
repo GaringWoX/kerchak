@@ -4,7 +4,7 @@ module.exports = async (client, message) => {
   if (!message.guild) return;
   
   if(client.ar[message.content]) {
-   if(client.ar[message.content].indexOf("<USER>") != -1) client.ar[message.content] = client.ar[message.content].replace("<USER>", `${message.author}`);
+   if(client.ar[message.content].indexOf("<USER>") != -1) client.ar[message.content] = client.ar[message.content].replace("<USER>", `<@${message.author.id}>`);
     message.channel.send(client.ar[message.content]);
   }
   
