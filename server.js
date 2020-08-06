@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
 const config = require('./config.json');
+const ar = require('./ar.json');
 const fs = require('fs');
 const db = require('quick.db');
 
@@ -9,6 +10,7 @@ const client = new Discord.Client({
 });
 
 client.config = config;
+client.ar = ar;
 
 
 fs.readdir("./events/", (err, files) => {
@@ -33,5 +35,6 @@ fs.readdir("./commands/", (err, files) => {
   });
 });
 
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
 client.login(process.env.TOKEN);
