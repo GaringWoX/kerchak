@@ -1,20 +1,19 @@
-module.exports = async (client, message) => {
+module.exports = (client, message) => {
   
-  if (message.author.bot) return;
-  if (!message.guild) return;
+  if (!message.guild || message.author.bot) return;
+  
+  if (message.content.indexOf(client.config.prefix) !== 0) {
+     (client.ar[message.content].indexOf("<USER>") != -1)
+       message.channel.send(client.ar[message.content].replace("<USER>", `${message.author}`))
+  };
   
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
-  if (!client.commands.has(command));
-  else client.commands.get(command).run(client, message, args);
-
-  if(!client.ar[message.content]) return;
-  if(client.ar[message.content].indexOf("<USER>") != -1) {
-    message.channel.send(client.ar[message.content].replace("<USER>", `${message.author}`));
-  } else
-  if(client.ar[message.content].indexOf("<USER>") != 0) {
-    message.channel.send(client.ar[message.content]);
-  }
+  const cmd = client.commands.get(command);
+  
+  if (!cmd) return;
+  
+  cmd.run(client, message, args);
   
 };
