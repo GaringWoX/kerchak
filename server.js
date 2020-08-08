@@ -3,6 +3,7 @@ const Canvas = require('canvas');
 const config = require('./config.json');
 const fs = require('fs');
 const db = require('quick.db');
+const moment = require('moment');
 
 const client = new Discord.Client({
   disableEveryone: true
