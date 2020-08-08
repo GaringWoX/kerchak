@@ -18,7 +18,7 @@ module.exports = (client, oldMember, newMember) => {
     .setAuthor(`${oldMember.displayName} just boosted the server!`, 'https://cdn.discordapp.com/emojis/739595657123201125.gif')
     .setThumbnail(newMember.user.displayAvatarURL())
     .setDescription(`Thank you ${newMember.user} for boosting the server.\nBecause of you, we are now have __**${newMember.guild.premiumSubscriptionCount}**__ boost in total.\nPlease DM our Admin or Moderator for a __**Custom Role!**__`)
-    .setFooter(`Current Server Level : ${newMember.guild.premiumTier}`, 'https://cdn.discordapp.com/emojis/739595657123201125.gif')
+    .setFooter(`Current Server Level: ${newMember.guild.premiumTier}`, 'https://cdn.discordapp.com/emojis/739595657123201125.gif')
     .setTimestamp()
   
     client.channels.cache.get(bcx).send(bembed);
