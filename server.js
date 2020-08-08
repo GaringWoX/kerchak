@@ -9,10 +9,7 @@ const client = new Discord.Client({
   disableEveryone: true
 });
 
-var ar = require('./ar.json', 'utf8');
-
 client.config = config;
-client.ar = ar;
 
 
 fs.readdir("./events/", (err, files) => {
