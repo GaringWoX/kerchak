@@ -2,9 +2,7 @@ const db = require('quick.db');
 
 exports.run = (client, message, args) => {
     
-    if(!message.member.hasPermission('ADMINISTRATOR')) {
-      return message.reply('You lack of __PERMISSION__ `ADMINISTRATOR`')
-    };
+    if(!message.member.hasPermission('ADMINISTRATOR')) return;
       
     if(!db.has(`wchan_${message.guild.id}`)) {
      return message.channel.send('Please set your __Welcome Channel!__')
