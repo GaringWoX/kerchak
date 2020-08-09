@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 
 module.exports = (client, guild, message) => {
+
+  if (!guild.available) return;
   
   const gdembed = new Discord.MessageEmbed()
   .setColor('#ff0000')
