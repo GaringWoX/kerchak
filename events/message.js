@@ -11,11 +11,6 @@ module.exports = async (client, message) => {
              "<@720224674457452594>",
              "<@508092111858434110>"];
   
-  if (trg === "fup") {
-    if (message.author.id.indexOf(client.config.ownerID) !== 0) return;
-    message.delete();
-    message.channel.send("<a:emoji_18:646742931142606889>");
-  } else
   if (trg === ar[0]) {
     if (message.guild.id !== (gid)) return;
     message.channel.send("<a:welcomeimage_1:727887823537176638><a:welcomeimage_2:727887823268610089>");
