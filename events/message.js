@@ -2,7 +2,7 @@ module.exports = async (client, message) => {
   
   if (!message.guild || message.author.bot) return;
   
-  const gid = ("718691607888789547" && "339210008594087940");
+  const gid = ("718691607888789547");
   const trg = message.content.toLowerCase();
   
   const ar = ["welkam", "welcome",
