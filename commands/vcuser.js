@@ -12,5 +12,5 @@ exports.run = async (client, message, args) => {
     .setDescription(`🔊 ${totalvcStates}`)
     .setTimestamp()
     message.channel.send(vcmbd);
-
+   }
 };
