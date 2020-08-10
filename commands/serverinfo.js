@@ -9,6 +9,17 @@ exports.run = async (client, message, args) => {
         let days = Math.floor(diff / 86400000);
         return days + (days == 1 ? " day" : " days") + " ago";
     };
+  
+  message.guild.members.fetch().then(fetchedMembers => {
+    const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online').size;
+    const totalIdle = fetchedMembers.filter(member => member.presence.status === 'idle').size;
+    const totalDND = fetchedMembers.filter(member => member.presence.status === 'dnd').size;
+    const totalOffline = fetchedMembers.filter(member => member.presence.status === 'offline').size;
+  
+  
+  message.guild.fetch().then(fetchedGuild => {
+    const totalvcStates = fetchedGuild.voiceStates.cache.size;
+  
     
     let partnered = {"true": "<:yes:741835487114821663> YES", "false": "<:no:741835555310141451> NO"};
     let emo = {"0": "100", "1": "200", "2": "300", "3": "400"};
@@ -30,6 +41,7 @@ exports.run = async (client, message, args) => {
         "russia": ":flag_ru: Russia",
         "southafrica": ":flag_za:  South Africa"
     };
+  
     
     const embed = new Discord.MessageEmbed()
     
@@ -48,14 +60,17 @@ exports.run = async (client, message, args) => {
         .addField("Channels | Roles | Emojis:", `${message.guild.channels.cache.size} | ${message.guild.roles.cache.size} | ${message.guild.emojis.cache.size}/${emo[message.guild.premiumTier]}`, true)
         .addField("AFK Channel | Member Highest Role:", `${message.guild.afkChannel} | ${message.member.roles.highest}`, true)
         .addField("Member Total | Humans | Bots:", `${message.guild.members.cache.size} | ${message.guild.members.cache.filter(member => !member.user.bot).size} | ${message.guild.members.cache.filter(member => member.user.bot).size}`, true)
-        .addField("Member Presences:", `<:online:741196747748933682> ${message.guild.members.cache.filter(member => member.presence.status === "online").size} | <:idle:741197218861678644> ${message.guild.members.cache.filter(member => member.presence.status === "idle").size} | <:dnd:741196524238667846> ${message.guild.members.cache.filter(member => member.presence.status === "dnd").size} | <:offline:741197268123648020> ${message.guild.members.cache.filter(member => member.presence.status === "offline").size}`, true)
-        .addField("Member in Voice Channels:", `🔊 ${message.guild.voiceStates.cache.size}`, true)
+        .addField("Member Presences:", `<:online:741196747748933682> ${totalOnline} | <:idle:741197218861678644> ${totalIdle} | <:dnd:741196524238667846> ${totalDND} | <:offline:741197268123648020> ${totalOffline}`, true)
+        .addField("Member in Voice Channels:", `🔊 ${totalvcStates}`, true)
         .addField("Creation Date:", `${moment(message.guild.createdTimestamp).format("llll")}\n(${checkDays(message.guild.createdAt)})`, true)
         .addField("You JoinedAt:", `${moment(message.member.joinedTimestamp).format("llll")}\n(${checkDays(message.member.joinedAt)})`, true)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .setFooter(`Requested by: ${message.member.user.username}#${message.member.user.discriminator}`, `${message.member.user.displayAvatarURL({ dynamic: true })}`, true)
-        .setTimestamp();
+        .setTimestamp()
     
-     message.channel.send({embed});
+     message.channel.send({embed})
+  });
+    
+  });
   
 };
