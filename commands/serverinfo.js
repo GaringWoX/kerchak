@@ -54,8 +54,8 @@ exports.run = async (client, message, args) => {
         .addField("You JoinedAt:", `${moment(message.member.joinedTimestamp).format("llll")}\n(${checkDays(message.member.joinedAt)})`, true)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .setFooter(`Requested by: ${message.member.user.username}#${message.member.user.discriminator}`, `${message.member.user.displayAvatarURL({ dynamic: true })}`, true)
-        .setTimestamp()
+        .setTimestamp();
     
-     message.channel.send({embed})
+     message.channel.send({embed});
   
 };
