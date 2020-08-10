@@ -37,7 +37,7 @@ exports.run = async (client, message) => {
         return message.channel.send(embed);
       }
       catch (error) {
-        console.error(error);
+        return message.reply('User not found!');
       }
   }
 };
