@@ -17,9 +17,10 @@ exports.run = async (client, message, args) => {
     const totalOffline = fetchedMembers.filter(member => member.presence.status === 'offline').size;
   
   
-  message.guild.fetch().then(fetchedGuild => {
-    const totalvcStates = fetchedGuild.voiceStates.cache.size;
+  const voiceChannels = message.guild.channels.cache.filter(c => c.type === 'voice');
+    let count = 0;
   
+    for (const [id, voiceChannel] of voiceChannels) count += voiceChannel.members.size;
     
     let partnered = {"true": "<:yes:741835487114821663> YES", "false": "<:no:741835555310141451> NO"};
     let emo = {"0": "100", "1": "200", "2": "300", "3": "400"};
@@ -61,7 +62,7 @@ exports.run = async (client, message, args) => {
         .addField("AFK Channel | Member Highest Role:", `${message.guild.afkChannel} | ${message.member.roles.highest}`, true)
         .addField("Member Total | Humans | Bots:", `${message.guild.members.cache.size} | ${message.guild.members.cache.filter(member => !member.user.bot).size} | ${message.guild.members.cache.filter(member => member.user.bot).size}`, true)
         .addField("Member Presences:", `<:online:741196747748933682> ${totalOnline} | <:idle:741197218861678644> ${totalIdle} | <:dnd:741196524238667846> ${totalDND} | <:offline:741197268123648020> ${totalOffline}`, true)
-        .addField("Member in Voice Channels:", `🔊 ${totalvcStates}`, true)
+        .addField("Member in Voice Channels:", `🔊 ${count}`, true)
         .addField("Creation Date:", `${moment(message.guild.createdTimestamp).format("llll")}\n(${checkDays(message.guild.createdAt)})`, true)
         .addField("You JoinedAt:", `${moment(message.member.joinedTimestamp).format("llll")}\n(${checkDays(message.member.joinedAt)})`, true)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
