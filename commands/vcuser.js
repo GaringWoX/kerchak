@@ -6,7 +6,6 @@ exports.run = async (client, message, args) => {
   
     for (const [id, voiceChannel] of voiceChannels) count += voiceChannel.members.size;
 
-
     const vcmbd = new Discord.MessageEmbed()
     .setColor('#7289da')
     .setTitle(`Total member in voice channels:`)
