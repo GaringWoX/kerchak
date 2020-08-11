@@ -11,11 +11,10 @@ exports.run = async (client, message, args) => {
     };
   
   message.guild.members.fetch().then(fetchedMembers => {
-    const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online').size;
+	  const totalOnline = fetchedMembers.filter(member => member.presence.status === 'online').size;
     const totalIdle = fetchedMembers.filter(member => member.presence.status === 'idle').size;
     const totalDND = fetchedMembers.filter(member => member.presence.status === 'dnd').size;
     const totalOffline = fetchedMembers.filter(member => member.presence.status === 'offline').size;
-  
   
   const voiceChannels = message.guild.channels.cache.filter(c => c.type === 'voice');
     let count = 0;
@@ -70,7 +69,6 @@ exports.run = async (client, message, args) => {
         .setTimestamp()
     
      message.channel.send({embed})
-  });
     
   });
   
