@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
+const db = require('quick-db');
 
 module.exports = async (client, member) => {
   
-  let chx = ('719480545951744040');
+  let chx = db.get(`wchan_${message.guild.id}`);
   
   if(chx === null) {
     return;
@@ -72,7 +73,7 @@ module.exports = async (client, member) => {
   
   // Welcome Embed
   
-  const chxx = ('718691608425398345');
+  const chxx = db.get(`wembc_${message.guild.id}`)
   const wembed = new Discord.MessageEmbed()
   
   .setAuthor(`Selamat Datang di ${member.guild.name}, ${member.displayName}!`, `${member.user.displayAvatarURL()}`)
